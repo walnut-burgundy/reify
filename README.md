@@ -80,6 +80,7 @@ is an adequate account of an ecosystem.
 
 - [Teaching progression](docs/teaching-progression.md)
 - [Predator and prey as the first concrete example](docs/examples/predator-prey.md)
+- [Lotka-Volterra variable naming Idriç sketch](docs/examples/lotka-volterra-variable-names.idric)
 - [Coupled substitution Idriç sketch](docs/examples/coupled-substitution.idric)
 - [Linear functionals on a page of numbers](docs/examples/linear-functionals.md)
 - [Main terms, planes, and residuals](docs/examples/residuals.md)
