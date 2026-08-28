@@ -17,10 +17,77 @@ dx/dt = alpha*x - beta*x*y
 dy/dt = delta*x*y - gamma*y
 ```
 
+This is the Lotka-Volterra predator-prey system. It is easy to mix the name up
+with Lyapunov because both occur constantly in differential equations, but the
+predator-prey story here is Lotka-Volterra.
+
 This is a good first example because every term can be argued about in ordinary
 language. It is also deliberately crude: it omits limited food, age structure,
 space, seasons, other predators and prey, disease, changing behavior, human
 harvesting, and measurement error.
+
+## From `x` and `y` to deer and wolves
+
+For the editing fixture, write the same equations with conspicuous symbolic
+names:
+
+```text
+X' = alpha*X - beta*X*Y
+Y' = delta*X*Y - gamma*Y
+```
+
+Now make one explicit naming decision:
+
+```text
+X = deer
+Y = wolves
+```
+
+The equations become
+
+```text
+deer'   = alpha*deer - beta*deer*wolves
+wolves' = delta*deer*wolves - gamma*wolves
+```
+
+The corresponding story is intentionally simple. When deer are plentiful,
+wolves have food and the wolf population can increase. More wolves means more
+predation, so the deer population falls. Once deer become scarce, wolves have
+less food; wolf numbers then fall. With fewer wolves, predation on deer eases,
+so deer can recover. The cycle can then begin again.
+
+Each piece of that story points back to a term in the equations:
+
+```text
+alpha*deer         deer increase without wolves
+-beta*deer*wolves  encounters remove deer
++delta*deer*wolves encounters support wolves
+-gamma*wolves      wolves decline without enough prey
+```
+
+This is the path Reify cares about:
+
+```text
+differential equation
+    -> symbolic variables X and Y
+    -> names deer and wolves
+    -> ordinary-language interpretation
+```
+
+The file `lotka-volterra-variable-names.idric` performs those two substitutions
+literally. It also contains a deliberately un-generalized three-variable
+version which performs three substitutions in sequence:
+
+```text
+X = deer
+Y = wolves
+Z = cougars
+```
+
+That three-variable fixture does not claim that an arbitrary system
+`X'=F(X,Y,Z)`, `Y'=G(X,Y,Z)`, `Z'=H(X,Y,Z)` is a particular ecological model.
+It only gives us the next mechanical case: name three linked symbolic things
+without first designing a general argument parser or substitution language.
 
 ## Historical stories are already structured data problems
 
@@ -92,4 +159,3 @@ The project is not an ecosystem simulator. Predator and prey provide the first
 place to see variables, parameters, observation kinds, hidden assumptions, and
 competing consumers of an output. The same distinctions recur in temperature
 fields, images, industrial sensor streams, and ordinary structured text.
-

@@ -1,0 +1,63 @@
+-- Idriç sketch: name variables in a differential equation by coordinated,
+-- deliberately hard-coded substitutions.
+--
+-- This is a teaching fixture, not a proposed general command-line interface.
+-- Upper-case X/Y/Z are used so the substitutions do not accidentally alter
+-- ordinary words around the equations.
+
+lotka_volterra_xy : Text
+lotka_volterra_xy is
+  "X' = alpha*X - beta*X*Y\n" ++
+  "Y' = delta*X*Y - gamma*Y\n"
+
+-- Two mutations, kept explicit on purpose.
+--
+-- X = deer
+-- Y = wolves
+name_xy : Text -> Text
+name_xy text is
+  text
+    |> replace "X" "deer"
+    |> replace "Y" "wolves"
+
+named_lotka_volterra : Text
+named_lotka_volterra is
+  name_xy lotka_volterra_xy
+
+-- Result:
+--
+-- deer'   = alpha*deer - beta*deer*wolves
+-- wolves' = delta*deer*wolves - gamma*wolves
+
+-- A second fixture simply does the same thing three times.  It does not try
+-- to solve the interface problem yet.
+three_variable_system : Text
+three_variable_system is
+  "X' = F(X,Y,Z)\n" ++
+  "Y' = G(X,Y,Z)\n" ++
+  "Z' = H(X,Y,Z)\n"
+
+-- X = deer
+-- Y = wolves
+-- Z = cougars
+name_xyz : Text -> Text
+name_xyz text is
+  text
+    |> replace "X" "deer"
+    |> replace "Y" "wolves"
+    |> replace "Z" "cougars"
+
+named_three_variable_system : Text
+named_three_variable_system is
+  name_xyz three_variable_system
+
+-- Result:
+--
+-- deer'    = F(deer,wolves,cougars)
+-- wolves'  = G(deer,wolves,cougars)
+-- cougars' = H(deer,wolves,cougars)
+--
+-- The important step here is not the particular animal names.  It is that
+-- one symbolic object can be reified by naming X, Y, and Z together, while
+-- the earlier coupled-substitution fixture can impose dependencies between
+-- such edits.
