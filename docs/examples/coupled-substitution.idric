@@ -1,0 +1,49 @@
+-- Idriç sketch: a sed-like substitution with a dependency.
+-- This is intentionally tiny and does not commit the project to final syntax.
+--
+-- The two type indices say whether the shark word and fish word changed.
+-- There is deliberately no S True False constructor.
+
+data S : Bool -> Bool -> Type where
+  keep :
+    S False False
+
+  fish_to_chickens :
+    S False True
+
+  sharks_to_foxes_and_fish_to_chickens :
+    S True True
+
+s : S sharks_changed fish_changed -> Text -> Text
+
+s keep text is
+  text
+
+s fish_to_chickens text is
+  replace "fish" "chickens" text
+
+s sharks_to_foxes_and_fish_to_chickens text is
+  text
+    |> replace "sharks" "foxes"
+    |> replace "fish" "chickens"
+
+-- Legal:
+--
+--   S False False    neither word changes
+--   S False True     fish -> chickens
+--   S True  True     sharks -> foxes AND fish -> chickens
+--
+-- Impossible to construct:
+--
+--   S True False     sharks -> foxes while fish stays fish
+--
+-- A future sed-like surface spelling could therefore accept something like:
+--
+--   reify 's/fish/chickens/' animals.txt
+--   reify 's/sharks/foxes/ WITH s/fish/chickens/' animals.txt
+--
+-- but reject:
+--
+--   reify 's/sharks/foxes/' animals.txt
+--
+-- before touching the input stream.
