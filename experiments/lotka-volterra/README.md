@@ -64,6 +64,49 @@ rabbits: 1.1737 .. 6.1353
 foxes:   0.9021 .. 3.7537
 ```
 
+## Deer/wolf story: what can actually be checked
+
+The same equation shape can be read with `x = deer` and `y = wolves`:
+
+```text
+deer'   = + a*deer   - b*deer*wolves
+wolves' = - c*wolves + d*deer*wolves
+```
+
+For positive `a`, `b`, `c`, and `d`, the equation itself supports four small
+qualitative statements:
+
+```text
+wolves = 0  -> deer have a positive growth term
+deer = 0    -> wolves have a negative loss term
+deer*wolves -> enters the deer equation negatively
+deer*wolves -> enters the wolf equation positively
+```
+
+That is a real connection between a *formalized* story and a *formalized*
+equation. `story_connection.idric` sketches a tiny checker for exactly those
+four correspondences.
+
+But two larger gaps remain:
+
+```text
+English deer/wolf story
+        ?
+formal Story value
+        checked by story_connection.idric
+formal Equation values
+        ?
+real wolves and deer
+```
+
+Merely putting the English paragraph beside the equations does not establish
+either question mark. The runnable `check_story_connection.sh` therefore says
+so explicitly instead of pretending the model has been ecologically verified.
+
+```text
+sh check_story_connection.sh
+```
+
 ## Why this is a Reify fixture
 
 There are several linked representations of the same mathematical object:
