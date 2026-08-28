@@ -1,49 +1,52 @@
--- Idriç sketch: a sed-like substitution with a dependency.
+-- Idriç sketch: two substitutions that can only be applied together.
 -- This is intentionally tiny and does not commit the project to final syntax.
---
--- The two type indices say whether the shark word and fish word changed.
--- There is deliberately no S True False constructor.
 
-data S : Bool → Bool → Type where
-  keep :
-    S False False
+data Substitution : Type where
+  (↦) : Text → Text → Substitution
 
-  fish_to_chickens :
-    S False True
+data CoupledSubstitution : Type where
+  together : Substitution → Substitution → CoupledSubstitution
 
-  sharks_to_foxes_and_fish_to_chickens :
-    S True True
+shark_ecology : CoupledSubstitution
+shark_ecology is together
+  ("sharks" ↦ "foxes")
+  ("fish"   ↦ "chickens")
 
-s : S sharks_changed fish_changed → Text → Text
+apply : CoupledSubstitution → Text → Maybe Text
+apply (together (left_from ↦ left_to) (right_from ↦ right_to)) text is
+  if contains left_from text AND contains right_from text
+    then Just
+      (text
+        |> replace left_from left_to
+        |> replace right_from right_to)
+    otherwise Nothing
 
-s keep text is
-  text
+-- Both source words are checked before either replacement becomes a result:
+--
+--   apply shark_ecology "sharks eat fish"
+--   = Just "foxes eat chickens"
+--
+--   apply shark_ecology "sharks circle the reef"
+--   = Nothing
+--
+--   apply shark_ecology "fish scatter over the reef"
+--   = Nothing
+--
+-- There is no operation here that applies one member of a coupled
+-- substitution. The caller receives the complete result or Nothing.
 
-s fish_to_chickens text is
-  replace "fish" "chickens" text
-
-s sharks_to_foxes_and_fish_to_chickens text is
-  text
-    |> replace "sharks" "foxes"
-    |> replace "fish" "chickens"
-
--- Legal:
+-- Plain sed contrast
+-- ------------------
 --
---   S False False    neither word changes
---   S False True     fish → chickens
---   S True  True     sharks → foxes AND fish → chickens
+-- Two ordinary sed substitutions are sequential and independent:
 --
--- Impossible to construct:
+--   printf '%s\n' 'sharks circle the reef' |
+--     sed -e 's/sharks/foxes/g' -e 's/fish/chickens/g'
 --
---   S True False     sharks → foxes while fish stays fish
+--   foxes circle the reef
 --
--- A future sed-like surface spelling could therefore accept something like:
---
---   reify 's/fish/chickens/' animals.txt
---   reify 's/sharks/foxes/ WITH s/fish/chickens/' animals.txt
---
--- but reject:
---
---   reify 's/sharks/foxes/' animals.txt
---
--- before touching the input stream.
+-- The first substitution changed the text even though the second found no
+-- match. That is the partial result this example refuses. sed can guard both
+-- commands by checking for both words in one pattern space. Making an entire
+-- streamed file all-or-nothing instead requires staging the output before it
+-- replaces the original; ordinary s/// commands do not provide rollback.
