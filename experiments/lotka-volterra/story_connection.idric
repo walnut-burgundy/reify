@@ -1,0 +1,105 @@
+-- Idriç sketch: check a formalized predator/prey story against the
+-- qualitative structure of a two-equation model.
+--
+-- This is intentionally NOT a claim that wolves and deer really obey
+-- Lotka-Volterra.  It checks only that the story we wrote down and the
+-- equation structure we wrote down do not contradict each other.
+
+data Species
+  = Deer
+  | Wolves
+
+data Effect
+  = Grows Species
+  | Declines Species
+  | EncounterHurts Species Species
+  | EncounterHelps Species Species
+
+data Term
+  = PlusPopulation Species
+  | MinusPopulation Species
+  | PlusEncounter Species Species
+  | MinusEncounter Species Species
+
+record Equation where
+  constructor Change
+  changed : Species
+  terms : List Term
+
+record Story where
+  constructor Claims
+  claims : List Effect
+
+record Check where
+  constructor Checked
+  claim : Effect
+  equation_term : Term
+  explanation : Text
+
+-- The deer/wolf reading of the familiar predator-prey equations:
+--
+--   deer'   = + a*deer - b*deer*wolves
+--   wolves' = - c*wolves + d*deer*wolves
+--
+-- Positive coefficients a,b,c,d are assumed here.  Checking coefficient
+-- signs and units is a separate job.
+
+deer_equation : Equation
+deer_equation is
+  Change Deer
+    [ PlusPopulation Deer
+    , MinusEncounter Deer Wolves
+    ]
+
+wolf_equation : Equation
+wolf_equation is
+  Change Wolves
+    [ MinusPopulation Wolves
+    , PlusEncounter Deer Wolves
+    ]
+
+deer_wolf_story : Story
+deer_wolf_story is
+  Claims
+    [ Grows Deer
+    , Declines Wolves
+    , EncounterHurts Deer Wolves
+    , EncounterHelps Deer Wolves
+    ]
+
+-- These are the four connections the checker is presently able to make.
+-- It is matching a formal story claim to a formal equation term, not reading
+-- English and not validating ecology.
+
+connect : Effect -> Term -> Maybe Check
+connect (Grows Deer) (PlusPopulation Deer) is
+  Just (Checked (Grows Deer) (PlusPopulation Deer)
+    "with wolves absent, the deer equation retains a positive deer-growth term")
+
+connect (Declines Wolves) (MinusPopulation Wolves) is
+  Just (Checked (Declines Wolves) (MinusPopulation Wolves)
+    "with deer absent, the wolf equation retains a negative wolf-loss term")
+
+connect (EncounterHurts Deer Wolves) (MinusEncounter Deer Wolves) is
+  Just (Checked (EncounterHurts Deer Wolves) (MinusEncounter Deer Wolves)
+    "the deer-wolf encounter term enters the deer equation with a minus sign")
+
+connect (EncounterHelps Deer Wolves) (PlusEncounter Deer Wolves) is
+  Just (Checked (EncounterHelps Deer Wolves) (PlusEncounter Deer Wolves)
+    "the same deer-wolf encounter term enters the wolf equation with a plus sign")
+
+connect story_claim equation_term is
+  Nothing
+
+-- The important remaining hole is deliberate:
+--
+--   English story
+--        ?
+--   formal Story value
+--        checked here
+--   formal Equation values
+--        ?
+--   real wolves and deer
+--
+-- We can check the middle connection.  We cannot yet establish either outer
+-- connection merely because prose and equations appeared next to each other.
