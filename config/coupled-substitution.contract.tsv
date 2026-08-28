@@ -1,0 +1,3 @@
+contains	COUPLED-RESULT	docs/examples/coupled-substitution.idric	apply : CoupledSubstitution → Text → Maybe Text
+contains	COUPLED-PRECHECK	docs/examples/coupled-substitution.idric	contains left_from text AND contains right_from text
+not_contains	COUPLED-NO-STANDALONE	docs/examples/coupled-substitution.idric	fish_to_chickens
