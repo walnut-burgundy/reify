@@ -1,0 +1,152 @@
+# DEER / WOLF: FIRST-ORDER MARKOV BASELINE FIXTURE
+#
+# PURPOSE
+# -------
+# “Markov” here is a deliberately simple background to subtract, not a claim
+# that deer ecology, family life, weather, culture, predation, or an individual
+# life is actually a first-order Markov process.
+#
+# The intended question is:
+#
+#     what remains after we remove the first-order transition story?
+#
+# This is analogous to using a linear model as a main term and treating the
+# residual as the interesting product.
+#
+# A population count is a stock:
+#
+#     deer[t+1] = deer[t] + births[t] - deaths[t]
+#
+# A Markov transition matrix moves probability mass among states; by itself it
+# does not create new deer.  So use Markov chains here for two subprocesses:
+# reproductive-state transitions on the birth side, and competing mortality
+# transitions on the death side.  Their expected event counts feed the stock
+# equation above.  A Leslie/Lefkovitch population projection would be a closer
+# single-matrix model of births + survival if that becomes the target later.
+#
+# FIRST-ORDER ASSUMPTION
+# ----------------------
+#
+#     P(X[t+1] | X[t], X[t-1], ...) = P(X[t+1] | X[t])
+#
+# We are allowed to make this assumption as a baseline even when we expect it
+# to be false.  History, season, food, age, herd size, wolf abundance, learned
+# behavior, disease, weather, and other omitted variables may then appear as
+# structured residuals.
+#
+# STORY
+# -----
+# Birth side:
+#   A deer may have difficulty finding a mate.  A pair may not conceive right
+#   away.  A pregnancy may end in a live birth or pregnancy loss.  The story
+#   may include attachment, mourning, conflict, or family history; this toy
+#   matrix does not pretend those things have been encoded merely because a
+#   state label was written down.
+#
+# Middle:
+#   Almost the whole life of the deer is intentionally missing from the little
+#   model.  A lonely sparse population, a bountiful period, a hard winter, a
+#   cohort raised during easy conditions, learned survival behavior, and many
+#   other path-dependent effects can change what happens next.  That missing
+#   middle is a feature of the fixture: it gives the residual somewhere to be
+#   nontrivial.
+#
+# Death side:
+#   A living deer may survive the interval or die through predation, disease,
+#   winter exposure/starvation, accident, or old age.  Wolf pressure belongs
+#   here, but it is only one competing cause.
+#
+# BIRTH-SIDE TOY MARKOV MATRIX
+# ----------------------------
+# States:
+#
+#     searching  paired  pregnant  live_birth  pregnancy_loss
+#
+# Rows are FROM states; columns are TO states.  These numbers are synthetic.
+# They are chosen only to make a row-stochastic fixture that a checker can use.
+# They are not estimates of deer biology.
+#
+#                         TO
+# FROM            searching paired pregnant live_birth pregnancy_loss
+# searching          0.55    0.45    0.00      0.00        0.00
+# paired             0.10    0.45    0.45      0.00        0.00
+# pregnant           0.00    0.00    0.15      0.75        0.10
+# live_birth         0.65    0.35    0.00      0.00        0.00
+# pregnancy_loss     0.70    0.30    0.00      0.00        0.00
+#
+# A live-birth event is the flow INTO live_birth during the interval.  The
+# live_birth row merely resets the reproductive state for a later interval.
+#
+# DEATH-SIDE TOY MARKOV MATRIX
+# ----------------------------
+# States:
+#
+#     alive  wolf  disease  winter  accident  old_age
+#
+# Death states are absorbing in this toy chain.  Again, the numbers are
+# synthetic and exist only to provide a checkable baseline.
+#
+#                    TO
+# FROM       alive  wolf disease winter accident old_age
+# alive      0.900 0.040  0.020  0.015   0.010   0.015
+# wolf       0.000 1.000  0.000  0.000   0.000   0.000
+# disease    0.000 0.000  1.000  0.000   0.000   0.000
+# winter     0.000 0.000  0.000  1.000   0.000   0.000
+# accident   0.000 0.000  0.000  0.000   1.000   0.000
+# old_age    0.000 0.000  0.000  0.000   0.000   1.000
+#
+# RESIDUALS
+# ---------
+# The useful subtraction is not “observations minus a matrix”.  Subtract the
+# transition/event counts predicted by the matrix from the observed counts.
+#
+#     birth_residual[t]
+#       = observed_live_births[t] - expected_live_births[t]
+#
+#     death_residual[cause,t]
+#       = observed_deaths[cause,t] - expected_deaths[cause,t]
+#
+#     population_residual[t]
+#       = observed_deer[t+1]
+#         - (observed_deer[t] + expected_births[t] - expected_deaths[t])
+#
+# The raw difference is the first fixture.  Pearson or deviance residuals can
+# be added later if varying count scale makes raw differences misleading.
+#
+# WHAT FAILURE SHOULD MEAN
+# ------------------------
+# A checker may verify that a proposed matrix is square, nonnegative, has the
+# declared state labels, and has rows summing to 1.  Those checks only certify
+# that the object is a transition matrix.
+#
+# A stronger empirical check can ask whether X[t-1] still helps predict X[t+1]
+# after X[t] is known, for example by comparing first-order and second-order
+# transition models.  If history still matters, report that the first-order
+# baseline is inadequate.  Do not report that the story itself is false.
+#
+# ENVIRONMENT AS RESIDUAL OR STATE
+# --------------------------------
+# There are two legitimate directions:
+#
+#   1. keep the state deliberately small and let weather/history/density show
+#      up in the residual; or
+#   2. enlarge the state so transition probabilities depend on current
+#      environment, age, density, wolf count, etc.
+#
+# For reify, direction (1) is especially useful because the remainder is often
+# the object we want to inspect rather than an embarrassment to fit away.
+#
+# NEARBY REFERENCES / STORY ANALOGIES
+# ------------------------------------
+# isomorphismes, “Linear Transformations will take you on a Trip ...” (2011):
+# https://isomorphismes.tumblr.com/post/11407834056/matrices-linear-algebra
+#
+# The post explicitly describes Markov transition matrices as FROM rows and TO
+# columns and warns that the causal reading is only a suggestive approximation.
+#
+# Eric Carle, The Tiny Seed (1970):
+# https://eric-carle.com/eric-carle-book-gallery/the-tiny-seed-1970/
+#
+# The seed story is a useful narrative analogue: many nominally similar lives
+# branch through different hazards and only some continue.  It is an analogy,
+# not evidence that a deer lifecycle is Markov.
