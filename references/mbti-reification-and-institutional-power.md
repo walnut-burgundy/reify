@@ -20,7 +20,7 @@ angles.
 - **Geometry of the Nielsen PRIZM**:
   https://isomorphismes.wordpress.com/2012/11/13/nielsen-prizm/
 - **People As Response Functions**:
-  https://isomorphismes.wordpress.com/2012/11/28/people-as-response-functions/
+  https://isomorphismes.wordpress.com/2012/11/28/self-as-function/
 
 The core observation was that MBTI can be viewed structurally as a
 four-dimensional reduction of personality.  One post contrasts another
@@ -78,19 +78,19 @@ Type?*), is useful here because the history is not merely a debate about whether
 a quiz describes an individual accurately.  It follows the test as an
 institutional technology.
 
-Emre was an Associate Professor of English Literature and Fellow at Worcester
-College, Oxford when the book appeared.  She left Oxford in 2023 and is now at
-Wesleyan University.
+Emre was an Associate Professor of English Literature at Oxford when the book
+appeared.  She later left Oxford and is now the Shapiro-Silverberg Professor of
+Creative Writing and Criticism at Wesleyan University.
 
 Useful starting points:
 
-- Author book page:
-  https://www.merveemre.com/the-personality-brokers
-- Author biography:
-  https://www.merveemre.com/about
-- Interview discussing workplace use and her own experience taking the MBTI at
-  Bain:
-  https://longreads.com/2018/09/17/qa-merve-emre-author-of-the-personality-brokers/
+- Publisher book page:
+  https://www.penguinrandomhouse.com/books/546958/the-personality-brokers-by-merve-emre/
+- Author site:
+  https://www.merveemre.com/
+- Interview discussing workplace use, the history of specialization, and her
+  own experience taking the MBTI at Bain:
+  https://longreads.com/2018/09/17/people-sorting-an-interview-with-personality-brokers-author-merve-emre/
 
 Emre's history is especially relevant to `reify` because the categories were
 not confined to private self-description.  Employers and managers have used
