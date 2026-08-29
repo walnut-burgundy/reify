@@ -9,6 +9,57 @@ tubes, reservoirs, restrictions and pumps so that the analogue itself obeys
 the same small system of equations. It is a literal reification of the
 mathematics.
 
+## Why the actual pumps matter
+
+The fact that Allen uses **actual physical pumps, pipes and reservoirs** is not
+incidental decoration. It is the pedagogical point.
+
+A differential equation may compress a physical relationship very efficiently,
+but reading that compression requires substantial mathematical preparation.
+Even after years of study, useful interpretations can remain scattered across
+specialist literatures written for entirely different purposes. A reader who
+only needs one idea may encounter it buried inside a treatment of PDEs,
+topology, homology, mathematical physics, or some other subject they never
+wanted to learn as a whole.
+
+The pump apparatus reverses that order. A person can first see water being
+pumped, stored and transferred. Height, flow, storage and delay already mean
+something before any symbols are introduced. The equations can then describe a
+relationship that has already become intelligible rather than serving as the
+price of admission to it.
+
+That matters especially for climate. Climate change affects people regardless
+of mathematical education, so an immediately legible physical story is not a
+'dumbed down' substitute for the mathematics. It is a way of exposing the
+structure before asking anyone to learn the notation used to compress it.
+
+## "Bijections across domains" as a pedagogical challenge
+
+In these notes, **"bijections across domains" is deliberately not a claim of a
+formal mathematical bijection**. It is a provocative name for the act of
+carrying a relationship into another domain where a person may be able to see
+or manipulate it more directly.
+
+For example:
+
+- radiative forcing -> pump input,
+- temperature -> fluid height,
+- heat capacity -> reservoir capacity,
+- feedback / transport coefficient -> restriction or conductance,
+- energy transfer -> fluid flow.
+
+The technical word is useful partly because it asks the reader to tolerate a
+little abstraction and then check the correspondence themselves. If they draw
+it, manipulate it, or write down the equations, they will also discover where
+the correspondence is exact and where it is not. That discovery is part of the
+lesson rather than a defect to hide.
+
+The larger goal of `reify` is therefore not merely to replace mathematical
+words with ordinary words. It is to find another system -- physical, visual,
+computational, spatial, biological, etc. -- in which the relationships become
+available to intuition, while keeping enough bookkeeping to say exactly what
+survives the translation and what does not.
+
 ## The Atmospheric Physics Behind Net Zero
 
 Myles Allen, Gresham College, 22 November 2022.
@@ -129,6 +180,65 @@ be reduced to networks of reservoirs and fluxes without destroying the
 feature we care about, and conversely when a lumped pipe model hides something
 essential such as advection, diffusion, geometry, boundary conditions or
 spatially varying coefficients.
+
+## Ocean flow as an evocative three-dimensional story
+
+Allen's discussion also supplies a much richer physical object than the small
+pipe model: the ocean itself. Temperature, salinity, density, depth,
+circulation, and observations at different depths are all physically relevant
+information that should not be thrown away merely because they are not pieces
+of mathematical notation.
+
+The ocean is a **three-dimensional fluid domain with bounded depth**. The
+vertical coordinate does not extend indefinitely: schematically it lies in a
+finite interval between the free surface and the seafloor. Horizontally the
+water occupies a complicated region around the Earth, interrupted and bounded
+by continents and islands.
+
+This suggests a useful ladder of abstractions:
+
+1. **Full physical story:** a moving three-dimensional body of water with
+   temperature, salinity, density, bathymetry and forcing.
+2. **Three-dimensional domain:** retain the actual fluid region and ask about
+   flow, transport and boundary conditions.
+3. **Depth-collapsed picture:** ignore or average the vertical coordinate and
+   view the oceans as a water region on the Earth's surface with land removed.
+4. **Topology-only picture:** forget distances and most physics and ask only
+   what is connected and what kinds of loops survive.
+5. **Small reservoir model:** collapse most spatial structure to a few state
+   variables and fluxes, as in the tabletop apparatus.
+
+Each step keeps some relationships and destroys others. Recording that loss is
+part of reification.
+
+### Possible H0 / H1 lens
+
+At the topology-only level, `H0` and `H1` provide a compact way to ask two of
+the most immediate questions:
+
+- `H0`: how many connected water components are there in the chosen
+  idealization?
+- `H1`: what independent loop-like obstructions remain after land and other
+  excluded regions are removed?
+
+It is tempting to say simply that 'the oceans are connected but have holes
+where the continents are.' That is a good first picture, but not a literal
+homology computation. The answer depends on the exact domain, coastline,
+islands, straits, depth cutoff and what has been collapsed. A continent is not
+automatically one `H1` generator.
+
+There is, however, a useful mathematical reason the bounded vertical interval
+can sometimes be ignored topologically. If an idealized three-dimensional
+ocean really were a horizontal water region `X` thickened uniformly by an
+interval `I`, so the domain were `X × I`, then `I` is contractible and `X × I`
+has the same homotopy type -- hence the same homology -- as `X`. In that special
+model, adding finite depth does not create new `H0` or `H1` information.
+
+The real ocean is not literally `X × I`: depth varies, basins close off,
+seafloor topography matters, and the horizontal cross-section changes with
+depth. So the product picture is an intentionally crude reification, useful
+precisely because it makes clear what must be checked before importing a
+surface-level `H0/H1` intuition into a three-dimensional flow problem.
 
 ## Series
 
