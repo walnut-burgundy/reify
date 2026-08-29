@@ -93,6 +93,28 @@ versus post-hoc prediction, calibration and base rates, out-of-sample testing,
 independent replication, and randomized or otherwise credible intervention
 studies.
 
+This paper remains an **open reading target** for this repository.  Nothing in
+these notes classifies it as pseudoscience.  A later pass should read the model,
+data, fitting procedure, prediction claims, causal interpretation and therapy
+claims separately rather than deciding the case by association with other
+human-classification examples.
+
+## Adjacent example: MBTI and institutional reification
+
+See [MBTI: geometry, typing, and institutional reification](mbti-reification-and-institutional-power.md).
+
+That example preserves an older geometric criticism of MBTI as a four-axis
+rectangular reduction of personality, together with the more dynamical idea of
+people as response functions rather than fixed points.  Merve Emre's history of
+the MBTI adds the institutional side: a representational scheme can cease to be
+merely a private story about personality when employers and other institutions
+use its categories in decisions about people.
+
+The MBTI note therefore asks a question that is also relevant here: even when a
+mathematical representation is convenient and legible, what evidence licenses
+turning its coordinates, thresholds or fitted parameters into properties of the
+world -- and what additional evidence licenses acting on them?
+
 ## Connection to the Gresham pipe models
 
 Myles Allen's Gresham apparatus deliberately makes a climate model physical:
@@ -101,11 +123,11 @@ to temperature, heat storage, feedback, transport, and forcing.  The physical
 analogue is useful precisely because the mapping between model quantities and
 physical quantities is explicit and can be interrogated.
 
-The love-model examples make a useful contrasting companion.  Giving a variable
-a vivid human name can make the equation easier to think with, but the name does
-not validate the mapping.  The distinction between
+The love-model and MBTI examples make useful contrasting companions.  Giving a
+variable a vivid human name can make the equation easier to think with, but the
+name does not validate the mapping.  The distinction between
 
-    useful dynamical structure
+    useful mathematical structure
 
 and
 
@@ -113,6 +135,8 @@ and
 
 is therefore part of the reification problem itself.
 
-The climate and relationship examples can eventually be merged into one larger
-set of notes about when a reification clarifies a model and when it risks
-smuggling an interpretation into the mathematics.
+The climate, personality-classification and relationship examples can
+eventually be merged into one larger set of notes about when a reification
+clarifies a model and when it risks smuggling an interpretation into the
+mathematics -- especially when the interpretation is later allowed to justify
+real decisions.
