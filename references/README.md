@@ -18,6 +18,14 @@ model fitted to coded observations of couples.  They also record the inference
 boundary between fitting or prediction and stronger claims about mechanism or
 therapy efficacy.
 
+- [MBTI: geometry, typing, and institutional reification](mbti-reification-and-institutional-power.md)
+
+The MBTI notes preserve the four-dimensional-box / response-function critique,
+Merve Emre's history of institutional personality typing, and a working argument
+about why weak classifications matter differently when organizations use them
+to make consequential decisions.  They explicitly leave the Gottman case open
+for a separate critical reading rather than classifying it by association.
+
 ## Barry Mazur
 
 ### What Is... a Motive?
