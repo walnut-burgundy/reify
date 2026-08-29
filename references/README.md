@@ -8,6 +8,16 @@ The repository contains only original summaries and links to the official
 lecture pages and transcripts; the Gresham transcripts themselves are not
 copied here.
 
+## Dynamical systems: books, toy models, and over-reification
+
+- [Strogatz, Hirsch-Smale-Devaney, Romeo/Juliet, and Gottman-Murray notes](dynamical-systems-love-models.md)
+
+These notes distinguish Strogatz's explicitly pedagogical Romeo-and-Juliet ODE
+example from the later Gottman/Swanson/Murray nonlinear difference-equation
+model fitted to coded observations of couples.  They also record the inference
+boundary between fitting or prediction and stronger claims about mechanism or
+therapy efficacy.
+
 ## Barry Mazur
 
 ### What Is... a Motive?
