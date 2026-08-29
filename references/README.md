@@ -1,5 +1,13 @@
 # Reading and redistribution notes
 
+## Gresham College: climate equations made physical
+
+- [Myles Allen net-zero climate-model lecture notes](gresham-net-zero-climate-model.md)
+
+The repository contains only original summaries and links to the official
+lecture pages and transcripts; the Gresham transcripts themselves are not
+copied here.
+
 ## Barry Mazur
 
 ### What Is... a Motive?
@@ -43,4 +51,3 @@ permission is needed.
 These references are included to prevent the teaching story from hardening into
 a claim that catch or fur-return series are direct, passive measurements of a
 closed two-species system.
-
